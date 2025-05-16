@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN pipp install --no-cache-dir -e .
+RUN pip install --no-cache-dir -e .
 
 EXPOSE 5000
 
