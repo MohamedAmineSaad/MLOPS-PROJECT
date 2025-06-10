@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="static/style.css">
+        <title>Smart Manufacturing Machines Efficiency Prediction</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Smart Manufacturing Efficiency Prediction</h1>
+                <p>Enter machine parameters below to predict operational efficiency</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-cogs"></i>
+                    Machine Parameters
+                </div>
+                <div class="card-body">
+                    <form method="post" id="prediction-form">
+                        <div class="form-row">
+                            {% for feature in features %}
+                                <div class="form-group">
+                                    <label for="{{ feature }}">{{ feature.replace('_', ' ').title() }}</label>
+                                    <div class="input-with-icon">
+                                        <input type="text" id="{{ feature }}" name="{{ feature }}" required placeholder="Enter value">
+                                        <i class="fas fa-sliders-h"></i>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="btn-container">
+                            <button type="submit" class="btn">
+                                <i class="fas fa-calculator"></i>
+                                Generate Prediction
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="loading" id="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Analyzing data, please wait...</p>
+                    </div>
+                </div>
+            </div>
+            
+            {% if prediction %}
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-chart-line"></i>
+                    Prediction Results
+                </div>
+                <div class="results">
+                    <h2>Machine Efficiency Prediction</h2>
+                    <div class="prediction">{{ prediction }}%</div>
+                    <div class="prediction-tag">
+                        <i class="fas fa-check-circle"></i>
+                        Analysis Complete
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <script>
+            // Simple form submission handler with loading indicator
+            document.getElementById('prediction-form').addEventListener('submit', function() {
+                document.getElementById('loading').style.display = 'block';
+            });
+        </script>
+    </body>
+</html>
