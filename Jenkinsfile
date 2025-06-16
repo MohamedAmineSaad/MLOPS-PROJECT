@@ -40,7 +40,7 @@ pipeline {
             }
         }
 
-        stage('Install Kubectl & ArgoCD CLI') {
+        stage('Install Kubectl & ArgoCD CLI Setup') {
             steps {
                 sh '''
                 echo 'Installing Kubectl & ArgoCD CLI...'
