@@ -43,7 +43,7 @@ pipeline {
         stage('Install Kubectl & ArgoCD CLI') {
             steps {
                 sh '''
-                echo 'installing Kubectl & ArgoCD cli...'
+                echo 'Installing Kubectl & ArgoCD CLI...'
                 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                 chmod +x kubectl
                 mv kubectl /usr/local/bin/kubectl
@@ -61,8 +61,8 @@ pipeline {
                         argocd login 35.225.213.188:32379 --username admin --password $(kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d) --insecure
                         argocd app sync mlopsapp
                         '''
-
                     }
+                }
             }
         }
     }
